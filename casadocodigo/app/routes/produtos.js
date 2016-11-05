@@ -4,10 +4,11 @@ module.exports = function( app ) {
   app.get( '/produtos', function( request, response ) {
 
     var connection = app.infra.connectionFactory();
+    var produtosBanco = app.infra.produtosBanco;
 
-    connection.query( 'select * from livros', function( error, result ) {
+    produtosBanco.lista( connection, function( error, resultados ) {
       response.render( 'produtos/lista', {
-        lista: result
+        lista: resultados
       });
     });
 
