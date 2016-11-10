@@ -1,15 +1,17 @@
 var mysql = require( 'mysql' );
 
-function createDBConnectcion() {
+var connectMySQL = function() {
   return mysql.createConnection({
     host: 'localhost',
     user: 'root',
     password: '',
     database: 'casadocodigo'
   });
-}
+};
 
 // Wrapper
 module.exports = function() {
-  return createDBConnectcion;
+  return connectMySQL;
 };
+
+exports.connect = connectMySQL;
