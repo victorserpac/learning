@@ -2,6 +2,16 @@ var express = require( '../config/express.js' )();
 var request = require( 'supertest' )( express );
 
 describe( '#ProdutosController', function() {
+  // node-database-cleaner
+  beforeEach(function( done ){
+    var conn = express.infra.connectionFactory();
+    conn.query( 'delete from livros', function( ex, result ) {
+      if ( !ex ) {
+        done();
+      }
+    });
+  });
+
   it( '#listagem json', function( done ) {
     request.get( '/produtos' )
       .set( 'Accept', 'application/json' )
@@ -17,16 +27,7 @@ describe( '#ProdutosController', function() {
 
   it( '#cadastro de novo produto com dados validos', function( done ) {
     request.post( '/produtos' )
-      .send( { titulo:'titulo', descricao:'novo livro', preco: 20.50 } )
+      .send( { titulo:'titulo', descricao:'novo livro', preco: 20.80 } )
       .expect( 302, done );
   });
 });
-
-
-
-// produtoController
-  // lista json
-  //
-  // cadastro aceita json
-  //
-  // cadastro aceita urlencoded
