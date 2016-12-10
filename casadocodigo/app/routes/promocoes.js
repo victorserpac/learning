@@ -11,8 +11,8 @@ module.exports = function(app) {
   });
 
   app.post( '/promocoes', function( req, res ) {
-    var promocoes = req.body;
-    console.log( promocoes );
+    var promocao = req.body;
+    app.get( 'io' ).emit( 'novaPromocao', promocao );
     res.redirect( 'promocoes/form' );
   });
 };
