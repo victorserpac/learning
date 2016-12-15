@@ -6,19 +6,19 @@ class Negotiation {
     this._value = value;
   }
 
-  getVolum() {
+  get volum() {
     return this._amount * this._value;
   }
 
-  getDate() {
+  get date() {
     return this._date;
   }
 
-  getAmount() {
+  get amount() {
     return this._amount;
   }
 
-  getValue() {
+  get value() {
     return this._value;
   }
 
