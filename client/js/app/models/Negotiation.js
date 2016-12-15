@@ -4,6 +4,8 @@ class Negotiation {
     this._date = date;
     this._amount = amount;
     this._value = value;
+
+    Object.freeze( this );
   }
 
   get volum() {

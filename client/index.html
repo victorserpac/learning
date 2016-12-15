@@ -62,11 +62,12 @@
     <script src="js/app/models/Negotiation.js"></script>
     <script>
       var n1 = new Negotiation( new Date(), 5, 700 );
+      n1._amount = 100000;
+
 
       console.log( n1.date );
-      console.log( n1.amount );
-      console.log( n1.value );
-      console.log( n1.volum );
+      n1.date.setDate(16);
+      console.log( n1.date );
 
     </script>
 </body>
