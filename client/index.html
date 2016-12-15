@@ -61,19 +61,29 @@
 
     <script src="js/app/models/Negotiation.js"></script>
     <script>
-      var today = new Date();
 
-      var n1 = new Negotiation( today, 5, 700 );
-      n1._amount = 100000;
+      let today = new Date();
+      let n1 = new Negotiation( today, 5, 700 );
 
       console.log( n1.date );
       today.setDate( 16 );
       console.log( n1.date );
 
-      console.log( n1.date );
-      n1.date.setDate( 16 );
-      console.log( n1.date );
+      for ( var i = 1; i <= 100; i++ ) {
+        var nome = 'Victor';
+        // body...
+      }
 
+      for ( let i2 = 1; i2 <= 100; i2++ ) {
+        let nome2 = 'Victor';
+        // body...
+      }
+
+      console.log( i );
+      console.log( nome );
+
+      console.log( i2 );
+      console.log( nome2 );
 
     </script>
 </body>
