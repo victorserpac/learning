@@ -1,7 +1,7 @@
 class Negotiation {
 
   constructor( date, amount, value ) {
-    this._date = date;
+    this._date = new Date( date.getTime() );
     this._amount = amount;
     this._value = value;
 
@@ -13,7 +13,7 @@ class Negotiation {
   }
 
   get date() {
-    return this._date;
+    return new Date( this._date.getTime() );
   }
 
   get amount() {
