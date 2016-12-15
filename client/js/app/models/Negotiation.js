@@ -1,9 +1,13 @@
 class Negotiation {
 
-  constructor() {
-    this.date = new Date();
-    this.amount = 1;
-    this.value = 0;
+  constructor( date, amount, value ) {
+    this.date = date;
+    this.amount = amount;
+    this.value = value;
+  }
+
+  getVolum() {
+    return this.amount * this.value;
   }
 
 }
