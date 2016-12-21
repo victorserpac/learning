@@ -18,20 +18,22 @@ class NegociacoesView {
 
         <tbody>
           ${
-            model.negociacoes.map( ( n ) => {
-              return `
-                <tr>
-                  <td>${ DateHelper.dataParaTexto( n.date ) }</td>
-                  <td>${ n.amount }</td>
-                  <td>${ n.value }</td>
-                  <td>${ n.volum }</td>
-                </tr>
-              `;
-            }).join( '' )
+            model.negociacoes.map( n => `
+              <tr>
+                <td>${ DateHelper.dataParaTexto( n.date ) }</td>
+                <td>${ n.amount }</td>
+                <td>${ n.value }</td>
+                <td>${ n.volum }</td>
+              </tr>
+            `).join( '' )
           }
         </tbody>
 
         <tfoot>
+          <td colspan="3"></td>
+          <td>
+            ${ model.negociacoes.reduce( ( total, n ) => total + n.volum, 0.0 ) }
+          </td>
         </tfoot>
       </table>
     `;
