@@ -3,10 +3,13 @@ class NegociacaoController {
   constructor() {
     let $ = document.querySelector.bind( document ); // Keep association with document
 
-    this._inputData       = $( '#data' );
-    this._inputQuantidade = $( '#quantidade' );
-    this._inputValor      = $( '#valor' );
+    this._inputData        = $( '#data' );
+    this._inputQuantidade  = $( '#quantidade' );
+    this._inputValor       = $( '#valor' );
     this._listaNegociacoes = new ListaNegociacoes();
+    this._negociacoesView  = new NegociacoesView( $( '#negociacoesView' ) );
+
+    this._negociacoesView.update();
   }
 
   adiciona( event ) {
