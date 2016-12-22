@@ -33,26 +33,21 @@ class NegociacaoController {
   importaNegociacoes() {
     let service = new NegociacaoService();
 
-    service.obterNegociacoesDaSemana()
-      .then( negociacoes => {
-        negociacoes.forEach( negociacao => this._listaNegociacoes.adiciona( negociacao ) );
-        this._mensagem.texto = 'Negociações da semana recebida com sucesso';
-      })
-      .catch( erro => this._mensagem.texto = erro );
+    Promise.all([
+      service.obterNegociacoesDaSemana(),
+      service.obterNegociacoesDaSemanaAnterior(),
+      service.obterNegociacoesDaSemanaRetrasada()
+    ]).then( negociacoes => {
 
-    service.obterNegociacoesDaSemanaAnterior()
-      .then( negociacoes => {
-        negociacoes.forEach( negociacao => this._listaNegociacoes.adiciona( negociacao ) );
-        this._mensagem.texto = 'Negociações da semana recebida com sucesso';
-      })
-      .catch( erro => this._mensagem.texto = erro );
+      negociacoes
+        .reduce( ( arrayAchatado, array ) => arrayAchatado.concat( array ), [] ) // Flat array
+        .forEach( negociacao => this._listaNegociacoes.adiciona( negociacao ));
 
-    service.obterNegociacoesDaSemanaRetrasada()
-      .then( negociacoes => {
-        negociacoes.forEach( negociacao => this._listaNegociacoes.adiciona( negociacao ) );
-        this._mensagem.texto = 'Negociações da semana recebida com sucesso';
-      })
-      .catch( erro => this._mensagem.texto = erro );
+      this._mensagem.texto = 'Negociações importadas com sucesso';
+    })
+    .catch( error => this._mensagem.texto = error );
+
+    
   }
 
   _criaNegociacao() {
