@@ -8,13 +8,48 @@ class NegociacaoController {
     this._inputValor      = $( '#valor' );
     this._ordemAtual      = '';
 
-    this._listaNegociacoes = new Bind( new ListaNegociacoes(), new NegociacoesView( $( '#negociacoesView' ) ),
+    this._listaNegociacoes = new Bind(
+      new ListaNegociacoes(),
+      new NegociacoesView( $( '#negociacoesView' ) ),
       'adiciona', 'esvazia', 'ordena', 'inverteOrdem'
     );
 
-    this._mensagem = new Bind( new Mensagem(), new MensagemView( $( '#mensagemView' ) ),
+    this._mensagem = new Bind(
+      new Mensagem(),
+      new MensagemView( $( '#mensagemView' ) ),
       'texto'
     );
+
+    /*
+      This works OK, but...
+
+    ConnectionFactory
+      .getConnection()
+      .then( connection => {
+        new NegociacaoDao( connection )
+          .listaTodos()
+          .then( negociacoes => {
+            negociacoes.forEach( negociacao => {
+              this._listaNegociacoes.adiciona( negociacao );
+            });
+          });
+      });
+     */
+
+    ConnectionFactory
+      .getConnection()
+      .then( connection => new NegociacaoDao( connection ) )
+      .then( dao => dao.listaTodos() )
+      .then( negociacoes =>
+        negociacoes.forEach( negociacao =>
+          this._listaNegociacoes.adiciona( negociacao )
+        )
+      )
+      .catch( erro => {
+        console.log( erro );
+        this._mensagem.texto = erro;
+      });
+
   }
 
   adiciona( event ) {
