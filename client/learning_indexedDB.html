@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Learning IndexedDB</title>
+  </head>
+  <body>
+
+    <script>
+      var openRequest = window.indexedDB.open( 'learningAdvancedJS', 1 );
+
+      openRequest.onupgradeneeded = event => {
+        console.log( 'cria ou altera um banco já existente' );
+      };
+
+      openRequest.onsuccess = event => {
+        console.log( 'Conexão obtida com sucesso' );
+      };
+
+      openRequest.onerror = event => {
+        console.log( event.target.error );
+      };
+    </script>
+  </body>
+</html>
