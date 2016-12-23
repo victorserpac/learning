@@ -7,19 +7,32 @@
   <body>
 
     <script>
-      var openRequest = window.indexedDB.open( 'learningAdvancedJS', 1 );
+
+      var connection;
+
+
+      var openRequest = window.indexedDB.open( 'learningAdvancedJS', 2 );
 
       openRequest.onupgradeneeded = event => {
         console.log( 'cria ou altera um banco já existente' );
+
+        var minhaConnection = event.target.result;
+        minhaConnection.createObjectStore( 'negociacoes' );
       };
 
       openRequest.onsuccess = event => {
         console.log( 'Conexão obtida com sucesso' );
+
+        connection = event.target.result;
       };
 
       openRequest.onerror = event => {
         console.log( event.target.error );
       };
+
+
+
+
     </script>
   </body>
 </html>
