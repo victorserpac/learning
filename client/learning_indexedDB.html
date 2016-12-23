@@ -81,6 +81,23 @@
         };
       }
 
+      ConnectionFactory
+        .getConnection()
+        .then( connection => {
+
+        });
+
+      ConnectionFactory
+        .getConnection()
+        .then( connection => {
+
+        });
+
+      a) getConnection vai ser um método estático
+      b) getConnection vai retornar uma promise
+      c) não importa o numero de vezes que eu chamar o método estático, a conexao tem que ser a mesma
+      d) o programador não pode chamar close diretamente. Ela só pode ser fechada através da própria connection factory
+
     </script>
   </body>
 </html>
