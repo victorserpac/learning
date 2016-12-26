@@ -1,33 +1,50 @@
-class ProxyFactory {
-  static create( objeto, props, acao ) {
+"use strict";
 
-    return new Proxy( objeto, {
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-      get( target, prop, receiver ) {
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-        if( props.includes( prop ) && ProxyFactory._isFunction( target[ prop ] ) ) {
-          return function() {
-            console.log( `interceptando ${prop}` );
-            Reflect.apply( target[ prop ], target, arguments );
-            return acao( target );
-          };
-        }
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-        return Reflect.get( target, prop, receiver );
-      },
-
-      set( target, prop, value, receiver ) {
-        if ( props.includes( prop ) ) {
-          target[ prop ] = value;
-          acao( target );
-        }
-
-        return Reflect.set( target, prop, value, receiver );
-      }
-    });
+var ProxyFactory = function () {
+  function ProxyFactory() {
+    _classCallCheck(this, ProxyFactory);
   }
 
-  static _isFunction( func ) {
-    return typeof func == typeof Function;
-  }
-}
+  _createClass(ProxyFactory, null, [{
+    key: "create",
+    value: function create(objeto, props, acao) {
+
+      return new Proxy(objeto, {
+        get: function get(target, prop, receiver) {
+
+          if (props.includes(prop) && ProxyFactory._isFunction(target[prop])) {
+            return function () {
+              console.log("interceptando " + prop);
+              Reflect.apply(target[prop], target, arguments);
+              return acao(target);
+            };
+          }
+
+          return Reflect.get(target, prop, receiver);
+        },
+        set: function set(target, prop, value, receiver) {
+          if (props.includes(prop)) {
+            target[prop] = value;
+            acao(target);
+          }
+
+          return Reflect.set(target, prop, value, receiver);
+        }
+      });
+    }
+  }, {
+    key: "_isFunction",
+    value: function _isFunction(func) {
+      return (typeof func === "undefined" ? "undefined" : _typeof(func)) == (typeof Function === "undefined" ? "undefined" : _typeof(Function));
+    }
+  }]);
+
+  return ProxyFactory;
+}();
+//# sourceMappingURL=ProxyFactory.js.map
