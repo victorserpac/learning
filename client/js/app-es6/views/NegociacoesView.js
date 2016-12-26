@@ -1,17 +1,29 @@
 import { View } from './View';
 import { DateHelper } from '../helpers/DateHelper';
+import { currentInstance } from '../controllers/NegociacaoController';
 
 export class NegociacoesView extends View {
+
+  constructor( elemento ) {
+
+    super( elemento );
+
+    elemento.addEventListener( 'click', function( event ) {
+      if( event.target.nodeName == 'TH' ) {
+        currentInstance().ordena( event.target.textContent.toLowerCase() );
+      }
+    });
+  }
 
   template( model ) {
     return `
       <table class="table table-hover table-bordered">
         <thead>
           <tr>
-            <th onclick="negociacaoController.ordena( 'date' )">DATA</th>
-            <th onclick="negociacaoController.ordena( 'amount' )">QUANTIDADE</th>
-            <th onclick="negociacaoController.ordena( 'value' )">VALOR</th>
-            <th onclick="negociacaoController.ordena( 'volum' )">VOLUME</th>
+            <th>Date</th>
+            <th>Amount</th>
+            <th>Value</th>
+            <th>Volum</th>
           </tr>
         </thead>
 

@@ -7,7 +7,7 @@ import { DateHelper } from '../helpers/DateHelper';
 import { Bind } from '../helpers/Bind';
 import { Negociacao } from '../models/Negociacao';
 
-export class NegociacaoController {
+class NegociacaoController {
 
   constructor() {
     let $ = document.querySelector.bind( document ); // Keep association with document
@@ -109,4 +109,12 @@ export class NegociacaoController {
 
     this._inputData.focus();
   }
+}
+
+// Singleton
+
+let negociacaoController = new NegociacaoController();
+
+export function currentInstance() {
+  return negociacaoController;
 }
