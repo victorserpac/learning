@@ -3,7 +3,7 @@ angular
     'minhasDiretivas',
     'ngAnimate',
     'ngRoute',
-    'ngResource'
+    'meusServicos'
   ])
   .config( function( $routeProvider, $locationProvider ) {
 

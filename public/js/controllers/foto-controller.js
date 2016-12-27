@@ -1,23 +1,15 @@
-angular.module( 'alurapic' ).controller( 'FotoController', function( $scope, $http, $resource, $routeParams ) {
+angular.module( 'alurapic' ).controller( 'FotoController', function( $scope, recursoFoto, $routeParams ) {
 
   $scope.foto = {};
   $scope.mensagem = '';
 
-  var recursoFoto = $resource( 'v1/fotos/:fotoId', null, {
-    update: {
-      method: 'PUT'
-    }
-  });
-
   if( $routeParams.fotoId ) {
-    $http.get( 'v1/fotos/' + $routeParams.fotoId )
-      .success( function( foto ) {
-        $scope.foto = foto;
-      })
-      .error( function( erro ) {
-        console.log( erro );
-        $scope.mensagem = 'Não foi possível obter a foto';
-      });
+    recursoFoto.get( { fotoId: $routeParams.fotoId }, function( foto ) {
+      $scope.foto = foto;
+    }, function( erro ) {
+      console.log( erro );
+      $scope.mensagem = 'Não foi possível obter a foto';
+    });
   }
 
   $scope.submeter = function() {
