@@ -18,7 +18,6 @@ angular.module( 'alurapic' ).controller( 'FotoController', function( $scope, rec
       cadastroDeFotos.cadastrar( $scope.foto )
         .then( function( dados ) {
           $scope.mensagem = dados.mensagem;
-
           if( dados.inclusao ) $scope.foto = {};
         })
         .catch( function( dados ) {
