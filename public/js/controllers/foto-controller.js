@@ -1,9 +1,20 @@
-angular.module( 'alurapic' ).controller('FotoController', function($scope){
+angular.module( 'alurapic' ).controller( 'FotoController', function( $scope, $http ) {
 
   $scope.foto = {};
+  $scope.mensagem = '';
 
   $scope.submeter = function() {
-    console.log( $scope.foto );
+    if ( $scope.formulario.$valid ) {
+      $http.post( 'v1/fotos', $scope.foto )
+        .success( function() {
+          $scope.foto = {};
+          $scope.mensagem = 'Foto incluida com sucesso';
+        })
+        .error( function( error ){
+          $scope.mensagem = 'Não foi possível incluir a foto';
+          console.log( error );
+        });
+    }
   };
 
 });
