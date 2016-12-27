@@ -1,8 +1,25 @@
-angular.module( 'alurapic' ).controller( 'FotosController', function( $scope ) {
+angular.module( 'alurapic' ).controller( 'FotosController', function( $scope, $http ) {
 
-  $scope.foto = {
-    titulo: 'Gato',
-    url: 'http://elelur.com/data_images/mammals/cat/cat-01.jpg'
-  };
+
+
+  $scope.fotos = [];
+
+  $http.get( 'v1/fotos' )
+    .success( function( fotos ) {
+      $scope.fotos = fotos;
+    })
+    .error( function( erro ) {
+      console.log( erro );
+    });
+
+
+  // var promise = $http.get( 'v1/fotos' );
+  // promise
+  //   .then( function( retorno ) {
+  //     $scope.fotos = retorno.data;
+  //   })
+  //   .catch( function( error ) {
+  //     console.log( error );
+  //   });
 
 });
