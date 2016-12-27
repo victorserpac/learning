@@ -2,7 +2,8 @@ angular
   .module( 'alurapic', [
     'minhasDiretivas',
     'ngAnimate',
-    'ngRoute'
+    'ngRoute',
+    'ngResource'
   ])
   .config( function( $routeProvider, $locationProvider ) {
 
