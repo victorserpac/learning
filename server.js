@@ -1,7 +1,7 @@
-var http = require('http');
+var http = require( 'http' );
+var app  = require( './config/express' );
 
-http.createServer(function( req, res ) {
-  res.end( 'foo' );
-}).listen( 3000, function() {
-  console.log( 'neh' );
+
+http.createServer( app ).listen( 3000, function() {
+  console.log( 'Server listening' );
 });
