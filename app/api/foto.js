@@ -11,6 +11,7 @@ api.lista = function( req, res ) {
 
 };
 
+
 api.buscaPorId = function( req, res ) {
 
 
@@ -19,6 +20,16 @@ api.buscaPorId = function( req, res ) {
   });
 
   res.json( foto );
+};
+
+
+api.removePorId = function(req, res ){
+
+  fotos = fotos.filter( foto => {
+    return foto._id != req.params.id;
+  });
+
+  res.sendStatus( 204 );
 };
 
 
