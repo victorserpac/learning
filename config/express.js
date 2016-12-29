@@ -5,6 +5,8 @@ var consign = require( 'consign' );
 
 app.use( express.static( './public' ) );
 
-consign().include( 'app/routes' ).into( app );
+consign()
+  .include( 'app/routes' )
+  .into( app );
 
 module.exports = app;
