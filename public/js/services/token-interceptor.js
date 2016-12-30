@@ -1,5 +1,5 @@
 angular.module( 'alurapic' )
-  .factory( 'tokenInterceptor', function( $window ) {
+  .factory( 'tokenInterceptor', function( $window, $q, $location ) {
     var interceptor = {};
 
     interceptor.response = function( response ) {
@@ -20,6 +20,16 @@ angular.module( 'alurapic' )
       }
 
       return config;
+    };
+
+    interceptor.responseError = function( rejection ) {
+      if ( rejection !== null && rejection.status == 401 ) {
+        delete $window.sessionStorage.token;
+        $location.path( '/login' );
+      }
+
+      return $q.reject( rejection );
+
     };
 
     return interceptor;
