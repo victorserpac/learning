@@ -10,6 +10,7 @@ app.use( bodyParser.json() );
 consign({ cwd: 'app' })
   .include( 'models' )
   .then( 'api' )
+  .then( 'routes/auth' )
   .then( 'routes' )
   .into( app );
 
