@@ -12,5 +12,9 @@
     "api"
   ],
   "author": "Victor Serpa do Carmo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "consign": "^0.1.2",
+    "express": "^4.14.0"
+  }
 }
