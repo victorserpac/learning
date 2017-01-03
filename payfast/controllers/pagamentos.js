@@ -5,9 +5,18 @@ module.exports = function( app ) {
 
   app.post( '/pagamentos/pagamento', function( req, res ) {
     var pagamento = req.body;
+    console.log( 'Processando uma requisicao de um novo pagamento' );
 
-    console.log( pagamento );
+    pagamento.status = 'CRIADO';
+    pagamento.data = new Date();
 
-    res.send('Ok.');
+    var connection = app.persistencia.connectionFactory();
+    var pagamentoDao = new app.persistencia.PagamentoDao( connection );
+    // console.log( pagamentoDao );
+    pagamentoDao.salva( pagamento, function( erro, resultado ){
+      console.log( 'pagamento criado' );
+    //
+      res.json( pagamento );
+    });
   });
 };
