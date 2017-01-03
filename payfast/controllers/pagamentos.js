@@ -11,8 +11,8 @@ module.exports = function( app ) {
     var erros = req.validationErrors();
 
     if ( erros ) {
-      console.log('Erros de validação encontrados');
-      res.status(400).send(erros);
+      console.log( 'Erros de validação encontrados' );
+      res.status( 500 ).send( erros );
       return;
     }
 
@@ -32,7 +32,8 @@ module.exports = function( app ) {
       } else {
         console.log( 'pagamento criado' );
 
-        res.json( pagamento );
+        res.location( 'pagamentos/pagamento/' + resultado.insertId );
+        res.status( 201 ).json( pagamento );
       }
     });
   });

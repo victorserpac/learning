@@ -11,7 +11,7 @@ PagamentoDao.prototype.lista = function ( callback ) {
 };
 
 PagamentoDao.prototype.buscaPorId = function ( id, callback ) {
-  this._connection.query( 'select * from pagamentos where id = ', callback );
+  this._connection.query("select * from pagamentos where id = ?",[id],callback);
 };
 
 
