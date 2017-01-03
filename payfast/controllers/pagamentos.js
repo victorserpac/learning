@@ -4,6 +4,18 @@ module.exports = function( app ) {
   });
 
   app.post( '/pagamentos/pagamento', function( req, res ) {
+
+    req.assert( 'forma_de_pagamento', 'Forma de pagamento é obrigatório' ).notEmpty();
+    req.assert( 'valor', 'Valor é obrigatório e deve ser um decimal' ).notEmpty().isFloat();
+
+    var erros = req.validationErrors();
+
+    if ( erros ) {
+      console.log('Erros de validação encontrados');
+      res.status(400).send(erros);
+      return;
+    }
+
     var pagamento = req.body;
     console.log( 'Processando uma requisicao de um novo pagamento' );
 
@@ -12,11 +24,16 @@ module.exports = function( app ) {
 
     var connection = app.persistencia.connectionFactory();
     var pagamentoDao = new app.persistencia.PagamentoDao( connection );
-    // console.log( pagamentoDao );
+
     pagamentoDao.salva( pagamento, function( erro, resultado ){
-      console.log( 'pagamento criado' );
-    //
-      res.json( pagamento );
+      if ( erro ) {
+        console.log( 'Erro ao inserir no banco' + erro );
+        res.status( 400 ).send( erro );
+      } else {
+        console.log( 'pagamento criado' );
+
+        res.json( pagamento );
+      }
     });
   });
 };
