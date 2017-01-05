@@ -15,6 +15,15 @@ if ( cluster.isMaster ) {
     cluster.fork();
   });
 
+  cluster.on( 'listening', function( worker ) {
+    console.log( 'cluster conectado ' + worker.process.pid );
+  });
+
+  cluster.on( 'exit', function( worker ) {
+    console.log('cluster %d desconectado', worker.process.pid );
+    cluster.fork();
+  });
+
 } else {
   console.log( 'thread slave' );
   require( './index' );
