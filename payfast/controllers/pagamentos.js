@@ -80,10 +80,34 @@ module.exports = function( app ) {
           var clienteCartoes = new app.servicos.clienteCartoes();
 
           clienteCartoes.autoriza( cartao, function( exception, request, response, retorno ) {
-            console.log( 'consumindo servico de cartoes' );
+            if ( exception ) {
+              console.log( exception );
+
+              res.status( 400 ).send( exception );
+              return;
+            }
             console.log( retorno );
 
-            res.status( 201 ).json( cartao );
+            res.location( 'pagamentos/pagamento/' + pagamento.id );
+
+            var response = {
+              dados_do_pagamento: pagamento,
+              cartao: retorno,
+              links: [
+                {
+                  href: 'http://localhost:3000/pagamentos/pagamento/' + pagamento.id,
+                  rel: 'confirmar',
+                  method: 'PUT'
+                },
+                {
+                  href: 'http://localhost:3000/pagamentos/pagamento/' + pagamento.id,
+                  rel: 'cancelar',
+                  method: 'DELETE'
+                }
+              ]
+            };
+
+            res.status( 201 ).json( response );
             return;
           });
 
