@@ -3,6 +3,25 @@ module.exports = function( app ) {
     res.end( 'OK.' );
   });
 
+  app.get( '/pagamentos/pagamento/:id', function( req, res ) {
+    var id = req.params.id;
+    console.log('consulta pagamento: ' + id );
+
+    var connection = app.persistencia.connectionFactory();
+    var pagamentoDao = new app.persistencia.PagamentoDao( connection );
+
+    pagamentoDao.buscaPorId( id, function( erro, resultado ) {
+      if ( erro ) {
+        console.log( 'erro ao consultado no banco: ' + erro );
+        res.status( 500 ).send( erro );
+        return;
+      }
+
+      console.log( 'pagamento encontrado: ' + JSON.stringify( resultado ) );
+      res.json( resultado );
+    });
+  });
+
   app.delete( '/pagamentos/pagamento/:id', function( req, res ) {
     var pagamento = {};
     var id = req.params.id;
