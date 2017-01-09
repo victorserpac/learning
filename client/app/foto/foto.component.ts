@@ -5,10 +5,9 @@ import { Component, Input } from '@angular/core';
   selector: 'foto',
   templateUrl: './foto.component.html'
 })
-
 export class FotoComponent {
-
-  @Input() titulo;
-  @Input() url;
-
+  
+  @Input() titulo: string;
+  @Input() url: string;
+  descricao: string;
 }
