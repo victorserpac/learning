@@ -12,6 +12,13 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var AppComponent = (function () {
     function AppComponent(http) {
+        var _this = this;
+        this.fotos = [];
+        var stream = http.get('v1/fotos');
+        stream.subscribe(function (res) {
+            _this.fotos = res.json();
+            console.log(_this.fotos);
+        });
     }
     return AppComponent;
 }());

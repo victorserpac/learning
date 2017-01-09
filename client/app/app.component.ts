@@ -9,8 +9,17 @@ import { Http } from '@angular/http';
 
 export class AppComponent {
 
+  fotos: Object[] = [];
+
   constructor( http: Http ) {
 
+    let stream = http.get( 'v1/fotos' );
+
+    stream.subscribe( res => {
+
+      this.fotos = res.json();
+      console.log(this.fotos);
+    })
   }
 
 }
