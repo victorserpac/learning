@@ -14,11 +14,13 @@ var AppComponent = (function () {
     function AppComponent(http) {
         var _this = this;
         this.fotos = [];
-        var stream = http.get('v1/fotos');
-        stream.subscribe(function (res) {
-            _this.fotos = res.json();
+        http
+            .get('v1/fotos')
+            .map(function (res) { return res.json(); })
+            .subscribe(function (fotos) {
+            _this.fotos = fotos;
             console.log(_this.fotos);
-        });
+        }, function (erro) { return console.log(erro); });
     }
     return AppComponent;
 }());
