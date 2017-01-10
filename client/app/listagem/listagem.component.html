@@ -4,6 +4,8 @@
 
 <div class="container">
 
+    <p *ngIf="mensagem.length" class="alert alert-info">{{mensagem}}</p>
+    
     <div class="row">
         <div class="col-md-12">
             <form>
@@ -27,5 +29,5 @@
             </foto>
             <button class="btn btn-danger btn-block" (click)="remove(foto)">Remover</button>
         </painel>
-    </div><!-- fim row --> 
+    </div><!-- fim row -->
 </div>
