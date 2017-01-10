@@ -9,9 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var foto_component_1 = require("../foto/foto.component");
 var CadastroComponent = (function () {
     function CadastroComponent() {
+        this.foto = new foto_component_1.FotoComponent();
     }
+    CadastroComponent.prototype.cadastrar = function (event) {
+        event.preventDefault();
+        console.log(this.foto);
+    };
     return CadastroComponent;
 }());
 CadastroComponent = __decorate([
