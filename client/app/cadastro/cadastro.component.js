@@ -38,12 +38,16 @@ var CadastroComponent = (function () {
         var _this = this;
         event.preventDefault();
         console.log(this.foto);
-        this.service.cadastra(this.foto)
-            .subscribe(function () {
+        this.service
+            .cadastra(this.foto)
+            .subscribe(function (res) {
+            _this.mensagem = res.obterMensagem();
             _this.foto = new foto_component_1.FotoComponent();
-            _this.router.navigate(['']);
+            if (!res.ehInclusao())
+                _this.router.navigate(['']);
         }, function (erro) {
             console.log(erro);
+            _this.mensagem = 'Não foi possível savar a foto';
         });
     };
     return CadastroComponent;
