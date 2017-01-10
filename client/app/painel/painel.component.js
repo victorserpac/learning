@@ -13,9 +13,9 @@ var PainelComponent = (function () {
     function PainelComponent() {
     }
     PainelComponent.prototype.ngOnInit = function () {
-        this.titulo = this.titulo.length > 7
-            ? this.titulo.substr(0, 7) + "..."
-            : this.titulo;
+        this.titulo = this.titulo.length > 7 ?
+            this.titulo.substr(0, 7) + '...' :
+            this.titulo;
     };
     return PainelComponent;
 }());
@@ -27,7 +27,8 @@ PainelComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'painel',
-        templateUrl: './painel.component.html'
+        templateUrl: './painel.component.html',
+        styleUrls: ['./painel.component.css']
     }),
     __metadata("design:paramtypes", [])
 ], PainelComponent);

@@ -14,6 +14,7 @@ var FotoComponent = (function () {
         this.titulo = '';
         this.url = '';
         this.descricao = '';
+        this._id = '';
     }
     return FotoComponent;
 }());
@@ -29,7 +30,8 @@ FotoComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'foto',
-        templateUrl: './foto.component.html'
+        templateUrl: './foto.component.html',
+        styleUrls: ['./foto.component.css']
     }),
     __metadata("design:paramtypes", [])
 ], FotoComponent);
