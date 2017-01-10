@@ -16,11 +16,16 @@ var BotaoComponent = (function () {
         this.tipo = 'button';
         this.desabilitado = false;
         this.acao = new core_1.EventEmitter();
+        this.confirmacao = false;
     }
     BotaoComponent.prototype.executaAcao = function () {
-        if (confirm('Tem certeza?')) {
-            this.acao.emit(null);
+        if (this.confirmacao) {
+            if (confirm('Tem certeza?')) {
+                this.acao.emit(null);
+            }
+            return;
         }
+        this.acao.emit(null);
     };
     return BotaoComponent;
 }());
@@ -44,6 +49,10 @@ __decorate([
     core_1.Output(),
     __metadata("design:type", Object)
 ], BotaoComponent.prototype, "acao", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean)
+], BotaoComponent.prototype, "confirmacao", void 0);
 BotaoComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
