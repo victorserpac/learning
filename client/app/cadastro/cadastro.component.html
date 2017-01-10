@@ -1,59 +1,42 @@
 <div class="container">
 
-  <form #meuForm="ngForm" (submit)="cadastrar($event)" class="row">
+  <form [formGroup]="meuForm" (submit)="cadastrar($event)" class="row">
     <div class="col-md-6">
+
       <div class="form-group">
 
         <label>Título</label>
 
         <input
-          required
           name="titulo"
-          #titulo = "ngModel"
           [(ngModel)]="foto.titulo"
+          formControlName="titulo"
           class="form-control"  autocomplete="off">
 
-        <span *ngIf="titulo.invalid" class="form-control alert-danger">
+        <span *ngIf="meuForm.controls.titulo.invalid" class="form-control alert-danger">
           Título obrigatório
         </span>
-
       </div>
-      
+
       <div class="form-group">
 
         <label>URL</label>
 
-        <input
-          required
-          name="url"
-          #url = "ngModel"
-          [(ngModel)]="foto.url"
-          class="form-control"  autocomplete="off">
-
-        <span *ngIf="url.invalid" class="form-control alert-danger">
+        <input name="url"  [(ngModel)]="foto.url"  formControlName="url" class="form-control"  autocomplete="off">
+        <span *ngIf="meuForm.controls.url.invalid" class="form-control alert-danger">
           URL obrigatória
         </span>
-
       </div>
 
       <div class="form-group">
-
         <label>Descrição</label>
-
-        <input
-          required
-          name="descricao"
-          #descricao = "ngModel"
-          [(ngModel)]="foto.descricao"
-          class="form-control"  autocomplete="off">
-
-        <span *ngIf="descricao.invalid" class="form-control alert-danger">
-          Descrição obrigatória
-        </span>
-
+        <textarea name="descricao"  [(ngModel)]="foto.descricao"  formControlName="descricao" class="form-control">
+        </textarea>
       </div>
 
-      <button type="submit" class="btn btn-primary" [disabled]="meuForm.form.invalid">Salvar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="meuForm.invalid">
+        Salvar
+      </button>
       <a [routerLink]="['']" class="btn btn-primary">Voltar</a>
       <hr>
     </div>
