@@ -53,9 +53,9 @@ export class CadastroComponent {
         this.service
             .cadastra(this.foto)
             .subscribe(res => {
-                this.mensagem = res.obterMensagem();
+                this.mensagem = res.mensagem;
                 this.foto = new FotoComponent();
-                if(!res.ehInclusao()) this.router.navigate(['']);
+                if(!res.inclusao) this.router.navigate(['']);
             }, erro => {
                 console.log(erro);
                 this.mensagem = 'Não foi possível savar a foto';

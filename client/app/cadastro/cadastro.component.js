@@ -41,9 +41,9 @@ var CadastroComponent = (function () {
         this.service
             .cadastra(this.foto)
             .subscribe(function (res) {
-            _this.mensagem = res.obterMensagem();
+            _this.mensagem = res.mensagem;
             _this.foto = new foto_component_1.FotoComponent();
-            if (!res.ehInclusao())
+            if (!res.inclusao)
                 _this.router.navigate(['']);
         }, function (erro) {
             console.log(erro);
