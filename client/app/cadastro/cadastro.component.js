@@ -9,24 +9,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
 var foto_component_1 = require("../foto/foto.component");
-var CadastroComponent = (function () {
-    function CadastroComponent() {
+var Cadastro = (function () {
+    function Cadastro(http) {
         this.foto = new foto_component_1.FotoComponent();
+        this.http = http;
     }
-    CadastroComponent.prototype.cadastrar = function (event) {
-        event.preventDefault();
+    Cadastro.prototype.cadastrar = function () {
+        var _this = this;
         console.log(this.foto);
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        this.http.post('v1/fotos', JSON.stringify(this.foto), { headers: headers })
+            .subscribe(function () {
+            _this.foto = new foto_component_1.FotoComponent();
+            console.log('Foto salva com sucesso');
+        }, function (erro) { return console.log(erro); });
     };
-    return CadastroComponent;
+    return Cadastro;
 }());
-CadastroComponent = __decorate([
+Cadastro = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'cadastro',
         templateUrl: './cadastro.component.html'
     }),
-    __metadata("design:paramtypes", [])
-], CadastroComponent);
-exports.CadastroComponent = CadastroComponent;
+    __metadata("design:paramtypes", [http_1.Http])
+], Cadastro);
+exports.Cadastro = Cadastro;
 //# sourceMappingURL=cadastro.component.js.map
