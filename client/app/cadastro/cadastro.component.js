@@ -12,10 +12,21 @@ var core_1 = require("@angular/core");
 var foto_component_1 = require("../foto/foto.component");
 var forms_1 = require("@angular/forms");
 var foto_service_1 = require("../foto/foto.service");
+var router_1 = require("@angular/router");
 var CadastroComponent = (function () {
-    function CadastroComponent(service, fb) {
+    function CadastroComponent(service, fb, route) {
+        var _this = this;
         this.foto = new foto_component_1.FotoComponent();
+        this.mensagem = '';
+        this.route = route;
         this.service = service;
+        this.route.params.subscribe(function (params) {
+            var id = params['id'];
+            if (id) {
+                _this.service.buscaPorId(id)
+                    .subscribe(function (foto) { return _this.foto = foto; }, function (erro) { return console.log(erro); });
+            }
+        });
         this.meuForm = fb.group({
             titulo: ['', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(4)])],
             url: ['', forms_1.Validators.required],
@@ -42,7 +53,7 @@ CadastroComponent = __decorate([
         selector: 'cadastro',
         templateUrl: './cadastro.component.html'
     }),
-    __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder])
+    __metadata("design:paramtypes", [foto_service_1.FotoService, forms_1.FormBuilder, router_1.ActivatedRoute])
 ], CadastroComponent);
 exports.CadastroComponent = CadastroComponent;
 //# sourceMappingURL=cadastro.component.js.map
