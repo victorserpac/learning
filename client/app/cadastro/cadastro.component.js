@@ -29,7 +29,10 @@ var CadastroComponent = (function () {
             }
         });
         this.meuForm = fb.group({
-            titulo: ['', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.minLength(4)])],
+            titulo: ['', forms_1.Validators.compose([
+                    forms_1.Validators.required,
+                    forms_1.Validators.minLength(4)
+                ])],
             url: ['', forms_1.Validators.required],
             descricao: [''],
         });
