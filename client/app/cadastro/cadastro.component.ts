@@ -7,7 +7,7 @@ import { FotoComponent } from '../foto/foto.component';
     selector: 'cadastro',
     templateUrl: './cadastro.component.html'
 })
-export class Cadastro {
+export class CadastroComponent {
 
     foto: FotoComponent = new FotoComponent();
     http: Http;

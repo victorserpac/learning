@@ -11,12 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 var foto_component_1 = require("../foto/foto.component");
-var Cadastro = (function () {
-    function Cadastro(http) {
+var CadastroComponent = (function () {
+    function CadastroComponent(http) {
         this.foto = new foto_component_1.FotoComponent();
         this.http = http;
     }
-    Cadastro.prototype.cadastrar = function () {
+    CadastroComponent.prototype.cadastrar = function () {
         var _this = this;
         console.log(this.foto);
         var headers = new http_1.Headers();
@@ -27,15 +27,15 @@ var Cadastro = (function () {
             console.log('Foto salva com sucesso');
         }, function (erro) { return console.log(erro); });
     };
-    return Cadastro;
+    return CadastroComponent;
 }());
-Cadastro = __decorate([
+CadastroComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'cadastro',
         templateUrl: './cadastro.component.html'
     }),
     __metadata("design:paramtypes", [http_1.Http])
-], Cadastro);
-exports.Cadastro = Cadastro;
+], CadastroComponent);
+exports.CadastroComponent = CadastroComponent;
 //# sourceMappingURL=cadastro.component.js.map
