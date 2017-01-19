@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
 import './css/pure-min.css';
 import './css/side-menu.css';
+import $ from 'jquery';
 
 class App extends Component {
 
   constructor() {
     super();
     this.state = {
-      lista: [
-        {
-          nome: 'Victor',
-          email: 'victor.serpa.c@icloud.com',
-          senha: '123456'
-        }
-      ]
+      lista: []
     };
+  }
+
+  componentWillMount() {
+    $.ajax({
+      url: 'http://cdc-react.herokuapp.com/api/autores',
+      dataType: 'json',
+      success: function( resposta ) {
+        this.setState( { lista: resposta } );
+      }.bind( this )
+    });
   }
 
   render() {
