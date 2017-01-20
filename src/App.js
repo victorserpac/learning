@@ -45,7 +45,8 @@ class App extends Component {
       }),
       success: function( resposta ) {
         console.log( "enviado com sucesso" );
-      },
+        this.setState( { lista: resposta } );
+      }.bind(this),
       error: function( resposta ) {
         console.log( "erro" );
       }
