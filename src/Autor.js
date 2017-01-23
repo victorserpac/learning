@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import InputCustomizado from './componentes/InputCustomizado';
 import BotaoSubmitCustomizado from './componentes/BotaoSubmitCustomizado';
+import PubSub from 'pubsub-js';
 
 export class FormularioAutor extends Component{
 
@@ -33,9 +34,9 @@ export class FormularioAutor extends Component{
         email: this.state.email,
         senha: this.state.senha
       }),
-      success: function( resposta ) {
-        this.props.callbackAtualizaListagem( resposta );
-      }.bind(this),
+      success: function( novaListagem ) {
+        PubSub.publish( 'atualiza-lista-autores', novaListagem );
+      },
       error: function( resposta ) {
         console.log( "erro" );
       }
@@ -106,7 +107,6 @@ export default class AutorBox extends Component{
     this.state = {
       lista: []
     };
-    this.atualizaListagem = this.atualizaListagem.bind( this );
   }
 
   componentDidMount() {
@@ -115,18 +115,17 @@ export default class AutorBox extends Component{
       dataType: 'json',
       success: function( resposta ) {
         this.setState( { lista: resposta } );
+        PubSub.subscribe( 'atualiza-lista-autores', function( topico, novaLista ) {
+          this.setState( { lista: novaLista } );
+        }.bind( this ) );
       }.bind( this )
     });
-  }
-
-  atualizaListagem( novaLista ) {
-    this.setState( { lista: novaLista } );
   }
 
   render() {
     return(
       <div>
-        <FormularioAutor callbackAtualizaListagem={ this.atualizaListagem }/>
+        <FormularioAutor/>
         <TabelaAutores lista={ this.state.lista }/>
       </div>
     );
