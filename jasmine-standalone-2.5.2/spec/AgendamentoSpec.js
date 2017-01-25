@@ -16,4 +16,13 @@ describe( 'Agendamento', function() {
 
   });
 
+  it( 'deve pular fins de semana', function() {
+
+    var consulta = new Consulta( gui, [], false, false, new Date( 2014, 5, 30 ) );
+    var novaConsulta = agenda.para( consulta );
+
+    expect( novaConsulta.getData().toString() ).toEqual( new Date( 2014, 6, 21 ).toString() );
+
+  });
+
 });
