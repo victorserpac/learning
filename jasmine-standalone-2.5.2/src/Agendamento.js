@@ -4,7 +4,9 @@ function Agendamento() {
 
     para: function( consulta ) {
 
-      var novaData = new Date( 2014, 7, 21 );
+      var vinteDiasEmMillisegundos = 1000 * 60 * 60 * 24 * 20;
+      var novaData = new Date( consulta.getData().getTime() + vinteDiasEmMillisegundos );
+
       var novaConsulta = new Consulta(
         consulta.getNome(),
         consulta.getProcedimentos(),
