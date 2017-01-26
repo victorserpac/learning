@@ -5,7 +5,7 @@ Template.novo.events({
     var input = $( '#tarefa' );
     var nome = input.val();
 
-    Tarefas.insert( { nome: nome, data: new Date() } );
+    Meteor.call( 'adiciona', { nome: nome } );
     input.val( '' );
   }
 });
