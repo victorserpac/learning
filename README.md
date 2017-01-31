@@ -65,3 +65,26 @@ And another interesting feature, is create some **disposable containers** as the
 ```
 docker run --rm -it ubuntu bash
 ```
+
+
+## 3. Build your own image
+
+It's nice that can be created our own image, a ubuntu with simple Node.js, cab be done as:
+
+Creating a base container
+```
+docker run -it ubuntu bash
+```
+
+Install something in there
+```
+apt-get update && apt-get install nodejs
+```
+
+And create a new image from this container's changes
+
+```
+docker commit -m "Installing NodeJS" [container's name|id] [image]/nodejs
+```
+
+This way, `ubuntu/nodejs` can be a fork from the ubuntu image.
