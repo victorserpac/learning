@@ -21,7 +21,13 @@ Docker will download the ubuntu image, create the server and run our `echo` comm
 * **`docker images`** - List images
 * **`docker ps`** - List running containers
 * **`docker ps -a`** - List all containers
-
+* **`docker rm [id|name]`** - Remove container
+* **`docker rm $(docker ps -qa)`** - Remove all containers
+* **`docker rmi [id|name]`** - Remove image
+* **`docker exec -it blog bash`** - Execute bash interacting with container
+* **`docker start [name|id]`** - Start a container
+* **`docker stop [name|id]`** - Stop a container
+* **`docker kill [name|id]`** - Kill a container
 
 ## 1. Running wordpress and mysql with docker
 
@@ -42,3 +48,20 @@ docker run --name blog --link database:mysql -e WORDPRESS_DB_PASSWORD=teste123 -
 
 * The `--link` is to establish a connection with this container.
 * `-p` is how it define the ports, the first is from the local machine and the second is from container.
+
+
+## 2. Containers
+
+As the containers are created, it's possible to execute *bash* to interact with them.
+
+```
+docker exec -i -t blog bash
+```
+* The **`-i`** is to interact with shell
+* The **`-t`** is to simulate the TTY
+
+And another interesting feature, is create some **disposable containers** as the following
+
+```
+docker run --rm -it ubuntu bash
+```
