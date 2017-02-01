@@ -8,26 +8,27 @@ Running a basic container to test it:
 docker run ubuntu /bin/echo "Hello Docker!"
 ```
 
-* The `run` option will init the container;
-* The image to use, here is `ubuntu`;
-* The command to execute in container;
+- The `run` option will init the container;
+- The image to use, here is `ubuntu`;
+- The command to execute in container;
 
 Docker will download the ubuntu image, create the server and run our `echo` command. It's possible to find more images in [Docker Store](https://store.docker.com/)
 
 ## Some quick commands
 
-* **`docker run`** - Create container
-* **`docker pull mysql`** - Download image
-* **`docker images`** - List images
-* **`docker ps`** - List running containers
-* **`docker ps -a`** - List all containers
-* **`docker rm [id|name]`** - Remove container
-* **`docker rm $(docker ps -qa)`** - Remove all containers
-* **`docker rmi [id|name]`** - Remove image
-* **`docker exec -it blog bash`** - Execute bash interacting with container
-* **`docker start [name|id]`** - Start a container
-* **`docker stop [name|id]`** - Stop a container
-* **`docker kill [name|id]`** - Kill a container
+- **`docker run`** - Create container
+- **`docker pull mysql`** - Download image
+- **`docker images`** - List images
+- **`docker ps`** - List running containers
+- **`docker ps -a`** - List all containers
+- **`docker rm [id|name]`** - Remove container
+- **`docker rm $(docker ps -qa)`** - Remove all containers
+- **`docker rmi [id|name]`** - Remove image
+- **`docker exec -it blog bash`** - Execute bash interacting with container
+- **`docker start [name|id]`** - Start a container
+- **`docker stop [name|id]`** - Stop a container
+- **`docker kill [name|id]`** - Kill a container
+- **`docker inspect [name|id]`** - Get container informations
 
 ## 1. Running wordpress and mysql with docker
 
@@ -37,8 +38,8 @@ To create the mysql database container, it's possible to use `--name` option to 
 docker run --name database -e MYSQL_ROOT_PASSWORD=teste123 -d mysql
 ```
 
-* Use **`-e`** to set a value to envinroment variable
-* **`-d`** to run it in background
+- Use **`-e`** to set a value to envinroment variable
+- **`-d`** to run it in background
 
 And create the wordpress container
 
@@ -46,8 +47,8 @@ And create the wordpress container
 docker run --name blog --link database:mysql -e WORDPRESS_DB_PASSWORD=teste123 -p 80:80 -d wordpress
 ```
 
-* The `--link` is to establish a connection with this container.
-* `-p` is how it define the ports, the first is from the local machine and the second is from container.
+- The `--link` is to establish a connection with this container.
+- `-p` is how it define the ports, the first is from the local machine and the second is from container.
 
 
 ## 2. Containers
@@ -57,8 +58,8 @@ As the containers are created, it's possible to execute *bash* to interact with 
 ```
 docker exec -i -t blog bash
 ```
-* The **`-i`** is to interact with shell
-* The **`-t`** is to simulate the TTY
+- The **`-i`** is to interact with shell
+- The **`-t`** is to simulate the TTY
 
 And another interesting feature, is create some **disposable containers** as the following
 
@@ -89,7 +90,8 @@ docker commit -m "Installing NodeJS" [container's name|id] [image]/nodejs
 
 This way, `ubuntu/nodejs` can be a fork from the ubuntu image.
 
-### Automate the process with Dockerfile
+
+## 4. Automate the build process with Dockerfile
 
 Automate is aways the best path to follow, and Docker file can help build an image with almost zero effort.
 
@@ -105,7 +107,55 @@ EXPOSE 80
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 ```
 
-* **`FROM`** is the base image to use
-* **`RUN`** is where we can instal Apache
-* **`EXPOSE`** is the port we want to use
-* **`CMD`** is the command to run Apache
+- **`FROM`** is the base image to use
+- **`RUN`** is where we can instal Apache
+- **`EXPOSE`** is the port we want to use
+- **`CMD`** is the command to run Apache
+
+
+## 5. What more can be done with Dockerfile?
+
+It's possible to add the files to the containter as in this:
+
+```
+FROM ubuntu
+
+RUN apt-get update && apt-get install -y apache2
+
+ADD app/ /var/www/html
+COPY app/ /var/www/html/app
+
+EXPOSE 80
+
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+```
+
+- **`ADD`** and **`COPY`** copy files to containter
+
+### Using docker compose
+
+To control some containers, a docker compose file manifest can handle it and save some effort in doing it by typing an entire code line.
+
+The file `docker-compose.yml` can be like
+
+```
+db:
+  image: mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD=teste123
+
+blog:
+  image: wordpress
+  environment:
+    - WORDPRESS_DB_PASSWORD=teste123
+  links:
+    - db:mysql
+  ports:
+    - 80:80
+```
+
+and run the containers with
+
+```
+docker-compose up
+```
