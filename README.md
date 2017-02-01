@@ -88,3 +88,24 @@ docker commit -m "Installing NodeJS" [container's name|id] [image]/nodejs
 ```
 
 This way, `ubuntu/nodejs` can be a fork from the ubuntu image.
+
+### Automate the process with Dockerfile
+
+Automate is aways the best path to follow, and Docker file can help build an image with almost zero effort.
+
+The Dockerfile can be like this
+
+```
+FROM ubuntu
+
+RUN apt-get update && apt-get install -y apache2
+
+EXPOSE 80
+
+CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
+```
+
+* **`FROM`** is the base image to use
+* **`RUN`** is where we can instal Apache
+* **`EXPOSE`** is the port we want to use
+* **`CMD`** is the command to run Apache
