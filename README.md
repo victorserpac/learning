@@ -38,8 +38,8 @@ To create the mysql database container, it's possible to use `--name` option to 
 docker run --name database -e MYSQL_ROOT_PASSWORD=teste123 -d mysql
 ```
 
-- Use **`-e`** to set a value to envinroment variable
-- **`-d`** to run it in background
+> - Use **`-e`** to set a value to envinroment variable
+> - **`-d`** to run it in background
 
 And create the wordpress container
 
@@ -47,8 +47,8 @@ And create the wordpress container
 docker run --name blog --link database:mysql -e WORDPRESS_DB_PASSWORD=teste123 -p 80:80 -d wordpress
 ```
 
-- The `--link` is to establish a connection with this container.
-- `-p` is how it define the ports, the first is from the local machine and the second is from container.
+> - The `--link` is to establish a connection with this container.
+> - `-p` is how it define the ports, the first is from the local machine and the second is from container.
 
 
 ## 2. Containers
@@ -58,8 +58,8 @@ As the containers are created, it's possible to execute *bash* to interact with 
 ```
 docker exec -i -t blog bash
 ```
-- The **`-i`** is to interact with shell
-- The **`-t`** is to simulate the TTY
+> - The **`-i`** is to interact with shell
+> - The **`-t`** is to simulate the TTY
 
 And another interesting feature, is create some **disposable containers** as the following
 
@@ -107,10 +107,10 @@ EXPOSE 80
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 ```
 
-- **`FROM`** is the base image to use
-- **`RUN`** is where we can instal Apache
-- **`EXPOSE`** is the port we want to use
-- **`CMD`** is the command to run Apache
+> - **`FROM`** is the base image to use
+> - **`RUN`** is where we can instal Apache
+> - **`EXPOSE`** is the port we want to use
+> - **`CMD`** is the command to run Apache
 
 
 ## 5. What more can be done with Dockerfile?
@@ -130,9 +130,10 @@ EXPOSE 80
 CMD ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 ```
 
-- **`ADD`** and **`COPY`** copy files to containter
+> - **`ADD`** and **`COPY`** copy files to containter
 
-### Using docker compose
+
+## 6. Using docker compose
 
 To control some containers, a docker compose file manifest can handle it and save some effort in doing it by typing an entire code line.
 
@@ -158,4 +159,25 @@ and run the containers with
 
 ```
 docker-compose up
+```
+
+
+## 7. Create volume to keep data
+
+Volumes are great way to keep files synced or even persist some database data with the command
+
+```
+docker run -it -v $(pwd):/tmp ubuntu bash
+```
+
+> - **`-v`** create the volume to container
+
+With **`docker-compose`**, the configuration can be done this way
+
+```
+blog:
+  image: wordpress
+  volumes:
+    - ~/blog/:/var/www/html/
+...
 ```
