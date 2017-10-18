@@ -1,0 +1,5 @@
+{"level":"info","message":"consulta pagamento: 15","timestamp":"2017-01-05T12:31:57.088Z"}
+{"level":"info","message":"::1 - - [05/Jan/2017:12:31:57 +0000] \"GET /pagamentos/pagamento/15 HTTP/1.1\" 200 156\n","timestamp":"2017-01-05T12:31:57.420Z"}
+{"level":"info","message":"consulta pagamento: 15","timestamp":"2017-01-05T13:06:50.840Z"}
+{"level":"info","message":"::1 - - [05/Jan/2017:13:06:51 +0000] \"GET /pagamentos/pagamento/15 HTTP/1.1\" 200 156\n","timestamp":"2017-01-05T13:06:51.492Z"}
+{"level":"info","message":"::1 - - [05/Jan/2017:13:07:01 +0000] \"POST /correios/calculo-prazo HTTP/1.1\" 200 162\n","timestamp":"2017-01-05T13:07:01.594Z"}
