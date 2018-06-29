@@ -19,8 +19,12 @@
         }
       ],
       "likers": [
-        { "login": "milenevlacerda" },
-        { "login": "vitorliberato" }
+        {
+          "login": "milenevlacerda"
+        },
+        {
+          "login": "vitorliberato"
+        }
       ]
     }
   ],
