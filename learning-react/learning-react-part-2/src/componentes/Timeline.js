@@ -10,15 +10,15 @@ export default class Timeline extends Component {
   }
 
   carregaFotos() {
-    let urlPerfil;
+    let url;
 
     if (this.login === undefined) {
-      urlPerfil = `http://localhost:3004/fotos?X-AUTH-TOKEN=${localStorage.getItem('auth-token')}`;
+      url = `http://localhost:3004/photos?_embed=likes&_embed=comments`;
     } else {
-      urlPerfil = `http://localhost:3004/fotos?userId=${this.login}`;
+      url = `http://localhost:3004/photos?userId=${this.login}&_embed=likes&_embed=comments`;
     }
 
-    fetch(urlPerfil)
+    fetch(url)
       .then(response => response.json())
       .then(fotos => {
         this.setState({ fotos: fotos });

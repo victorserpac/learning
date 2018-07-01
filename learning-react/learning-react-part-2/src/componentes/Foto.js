@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 class FotoAtualizacoes extends Component {
+
   render() {
     return (
       <section className="fotoAtualizacoes">
@@ -21,8 +22,8 @@ class FotoInfo extends Component {
       <div className="foto-in fo">
         <div className="foto-info-likes">
           {
-            this.props.foto.likers.map((liker) => {
-              return (<Link to={`/timeline/${liker.login}`} key={liker.login} href="#">{liker.login},</Link>)
+            this.props.foto.likes.map((liker) => {
+              return (<Link to={`/timeline/${liker.userId}`} key={liker.userId} href="#">{liker.userId},</Link>)
             })
           }
           curtiram
@@ -35,11 +36,11 @@ class FotoInfo extends Component {
 
         <ul className="foto-info-comentarios">
           {
-            this.props.foto.comentarios.map(comentario => {
+            this.props.foto.comments.map(comentario => {
               return (
-                <li key={comentario.login} className="comentario">
-                  <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">{comentario.login} </Link>
-                  {comentario.texto}
+                <li key={comentario.userId} className="comentario">
+                  <Link to={`/timeline/${comentario.userId}`} className="foto-info-autor">{comentario.userId} </Link>
+                  {comentario.comment}
                 </li>
               );
             })
@@ -66,14 +67,14 @@ class FotoHeader extends Component {
   }
 }
 
-export default class Foto extends Component {
+export default class FotoItem extends Component {
   render() {
     return (
       <div className="foto">
         <FotoHeader foto={this.props.foto} />
         <img alt="foto" className="foto-src" src={this.props.foto.urlFoto} />
         <FotoInfo foto={this.props.foto} />
-        <FotoAtualizacoes />
+        <FotoAtualizacoes foto={this.props.foto} />
       </div>
     );
   }

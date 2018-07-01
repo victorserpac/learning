@@ -4,34 +4,23 @@
       "id": "victorserpac"
     },
     {
+      "id": "milenevlacerda"
+    },
+    {
       "id": "cristiano"
+    },
+    {
+      "id": "vitorliberato"
     }
   ],
-  "fotos": [
+  "photos": [
     {
       "id": 1,
       "urlFoto": "https://instagram.fpoa4-1.fna.fbcdn.net/vp/8ac9ac8cfeb62c2f6924c6cff233a2ea/5BBB47F8/t51.2885-15/sh0.08/e35/p640x640/33638692_380336805821922_3444139127975444480_n.jpg",
       "urlPerfil": "https://instagram.fpoa4-1.fna.fbcdn.net/vp/4d7c65d69cae04360fceb0da87702812/5BBAF8D3/t51.2885-19/s150x150/18722489_1211750098954045_4809388169130672128_a.jpg",
       "comentario": "Eu na vida tentando ser alguém que nunca mesmo tive o prazer de conhecer",
       "userId": "victorserpac",
-      "horario": "03/10/2016 20:13",
-      "comentarios": [
-        {
-          "login": "milenevlacerda",
-          "texto": "Lindo <3"
-        }
-      ],
-      "likers": [
-        {
-          "login": "milenevlacerda"
-        },
-        {
-          "login": "vitorliberato"
-        },
-        {
-          "login": "cristiano"
-        }
-      ]
+      "horario": "03/10/2016 20:13"
     },
     {
       "id": 2,
@@ -39,16 +28,42 @@
       "urlPerfil": "https://instagram.fpoa4-1.fna.fbcdn.net/vp/2d21f5390ab7b7306ee6b44ce38a2c99/5BE8BE88/t51.2885-19/s150x150/27580324_1961241000859897_4541351977585475584_n.jpg",
       "comentario": "What a dream!!! 5 champions leagues",
       "userId": "cristiano",
-      "horario": "27/05/2018",
-      "comentarios": [],
-      "likers": [
-        {
-          "login": "milenevlacerda"
-        },
-        {
-          "login": "victorserpac"
-        }
-      ]
+      "horario": "27/05/2018"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "photoId": 1,
+      "userId": "milenevlacerda",
+      "comment": "Lindo <3"
+    }
+  ],
+  "likes": [
+    {
+      "id": 1,
+      "photoId": 1,
+      "userId": "milenevlacerda"
+    },
+    {
+      "id": 2,
+      "photoId": 2,
+      "userId": "cristiano"
+    },
+    {
+      "id": 3,
+      "photoId": 1,
+      "userId": "vitorliberato"
+    },
+    {
+      "id": 4,
+      "photoId": 2,
+      "userId": "victorserpac"
+    },
+    {
+      "photoId": 2,
+      "userId": "vitorliberato",
+      "id": 5
     }
   ]
 }
