@@ -5,30 +5,25 @@ class FotoAtualizacoes extends Component {
 
   like(e) {
     e.preventDefault();
+    this.props.like(this.props.foto.id);
+  }
 
-    const requestInfo = {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      body: JSON.stringify({
-        photoId: this.props.foto.id,
-        userId: localStorage.getItem('userId'),
-      }),
-    };
-
-    fetch('http://localhost:3004/likes', requestInfo)
-      .then(response => {
-        console.log(response);
-      })
+  comenta(e) {
+    e.preventDefault();
+    this.props.comenta(this.props.foto.id, this.comentario.value);
   }
 
   render() {
     return (
       <section className="fotoAtualizacoes">
         <a onClick={this.like.bind(this)} className="fotoAtualizacoes-like">Like</a>
-        <form className="fotoAtualizacoes-form">
-          <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo" />
+        <form className="fotoAtualizacoes-form" onSubmit={this.comenta.bind(this)}>
+          <input
+            type="text"
+            placeholder="Adicione um comentário..."
+            className="fotoAtualizacoes-form-campo"
+            ref={input => this.comentario = input}
+          />
           <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit" />
         </form>
       </section>
@@ -43,7 +38,13 @@ class FotoInfo extends Component {
         <div className="foto-info-likes">
           {
             this.props.foto.likes.map((liker) => {
-              return (<Link to={`/timeline/${liker.userId}`} key={liker.userId} href="#">{liker.userId},</Link>)
+              return (
+                <Link
+                  to={`/timeline/${liker.userId}`}
+                  key={liker.userId}>
+                  {liker.userId},
+                </Link>
+              )
             })
           }
           curtiram
@@ -58,7 +59,7 @@ class FotoInfo extends Component {
           {
             this.props.foto.comments.map(comentario => {
               return (
-                <li key={comentario.userId} className="comentario">
+                <li key={comentario.id} className="comentario">
                   <Link to={`/timeline/${comentario.userId}`} className="foto-info-autor">{comentario.userId} </Link>
                   {comentario.comment}
                 </li>
@@ -78,7 +79,9 @@ class FotoHeader extends Component {
         <figure className="foto-usuario">
           <img src={this.props.foto.urlPerfil} alt="foto do usuario" />
           <figcaption className="foto-usuario">
-            <a href="#">{this.props.foto.userId}</a>
+            <Link to={`/timeline/${this.props.foto.userId}`}>
+              {this.props.foto.userId}
+            </Link>
           </figcaption>
         </figure>
         <time className="foto-data">{this.props.foto.horario}</time>
@@ -94,7 +97,7 @@ export default class FotoItem extends Component {
         <FotoHeader foto={this.props.foto} />
         <img alt="foto" className="foto-src" src={this.props.foto.urlFoto} />
         <FotoInfo foto={this.props.foto} />
-        <FotoAtualizacoes foto={this.props.foto} />
+        <FotoAtualizacoes {...this.props} />
       </div>
     );
   }
