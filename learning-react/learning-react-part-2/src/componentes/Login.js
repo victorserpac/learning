@@ -21,7 +21,7 @@ export default class Login extends Component {
 
     fetch('http://localhost:3004/login', requestInfo)
       .then(response => {
-        if (response.ok) {          
+        if (response.ok) {
           return response.json();
         } else {
           throw new Error('não foi possível fazer o login');
@@ -29,6 +29,7 @@ export default class Login extends Component {
       })
       .then(res => {
         localStorage.setItem('auth-token', res.token);
+        localStorage.setItem('userId', res.userId);
         browserHistory.push('/timeline');
       })
       .catch(error => {

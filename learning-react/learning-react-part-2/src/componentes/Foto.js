@@ -3,10 +3,30 @@ import { Link } from 'react-router';
 
 class FotoAtualizacoes extends Component {
 
+  like(e) {
+    e.preventDefault();
+
+    const requestInfo = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        photoId: this.props.foto.id,
+        userId: localStorage.getItem('userId'),
+      }),
+    };
+
+    fetch('http://localhost:3004/likes', requestInfo)
+      .then(response => {
+        console.log(response);
+      })
+  }
+
   render() {
     return (
       <section className="fotoAtualizacoes">
-        <a href="#" className="fotoAtualizacoes-like">Likar</a>
+        <a onClick={this.like.bind(this)} className="fotoAtualizacoes-like">Like</a>
         <form className="fotoAtualizacoes-form">
           <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo" />
           <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit" />
