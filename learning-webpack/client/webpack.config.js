@@ -15,23 +15,35 @@ plugins.push(
   })
 );
 
+plugins.push(
+  new webpack.optimize.CommonsChunkPlugin(
+    {
+      name: 'vendor',
+      filename: 'vendor.bundle.js'
+    }
+  )
+);
+
 if (process.env.NODE_ENV === 'production') {
   plugins.push(new webpack.optimize.ModuleConcatenationPlugin());
   plugins.push(new babiliPlugin());
 
   plugins.push(new optimizeCSSAssetsPlugin({
     cssProcessor: require('cssnano'),
-    cssProcessorOptions: { 
+    cssProcessorOptions: {
       discardComments: {
-        removeAll: true 
+        removeAll: true
       }
     },
     canPrint: true
- }));
+  }));
 }
 
 module.exports = {
-  entry: './app-src/app.js',
+  entry: {
+    app: './app-src/app.js',
+    vendor: ['jquery', 'bootstrap', 'reflect-metadata']
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -46,28 +58,28 @@ module.exports = {
           loader: 'babel-loader'
         }
       },
-      { 
-        test: /\.css$/, 
+      {
+        test: /\.css$/,
         loader: extractTextPlugin.extract({
           fallback: 'style-loader',
           use: 'css-loader',
         }),
       },
-      { 
-        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'url-loader?limit=10000&mimetype=application/font-woff' 
+      {
+        test: /\.(woff|woff2)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff'
       },
-      { 
-        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/, 
+      {
+        test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'url-loader?limit=10000&mimetype=application/octet-stream'
       },
-      { 
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'file-loader' 
+      {
+        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file-loader'
       },
-      { 
-        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, 
-        loader: 'url-loader?limit=10000&mimetype=image/svg+xml' 
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml'
       }
     ],
   },
