@@ -4,13 +4,7 @@
       "id": "victorserpac"
     },
     {
-      "id": "milenevlacerda"
-    },
-    {
       "id": "cristiano"
-    },
-    {
-      "id": "vitorliberato"
     }
   ],
   "photos": [
@@ -32,74 +26,7 @@
     }
   ],
   "comments": [
-    {
-      "id": 1,
-      "photoId": 1,
-      "userId": "milenevlacerda",
-      "comment": "Lindo <3"
-    },
-    {
-      "photoId": 2,
-      "userId": "victorserpac",
-      "comment": "asdasd",
-      "id": 2
-    },
-    {
-      "photoId": 2,
-      "userId": "victorserpac",
-      "comment": "asdsa",
-      "id": 3
-    },
-    {
-      "photoId": 2,
-      "userId": "victorserpac",
-      "comment": "teste",
-      "id": 4
-    },
-    {
-      "photoId": 2,
-      "userId": "victorserpac",
-      "comment": "vamooo",
-      "id": 5
-    },
-    {
-      "photoId": 2,
-      "userId": "victorserpac",
-      "comment": "teste",
-      "id": 6
-    },
-    {
-      "photoId": 2,
-      "userId": "victorserpac",
-      "comment": "dale",
-      "id": 7
-    }
   ],
   "likes": [
-    {
-      "id": 1,
-      "photoId": 1,
-      "userId": "milenevlacerda"
-    },
-    {
-      "id": 2,
-      "photoId": 2,
-      "userId": "cristiano"
-    },
-    {
-      "id": 3,
-      "photoId": 1,
-      "userId": "vitorliberato"
-    },
-    {
-      "photoId": 2,
-      "userId": "vitorliberato",
-      "id": 5
-    },
-    {
-      "photoId": 1,
-      "userId": "victorserpac",
-      "id": 6
-    }
   ]
 }
